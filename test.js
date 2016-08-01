@@ -1,8 +1,11 @@
 'use strict'
 
 let prompt = require('./index')
-prompt('password: ')
+prompt('hide: ', {method: 'hide'})
 .then(password => {
+  console.log(`entered: ${password}`)
+  return prompt('mask: ', {method: 'mask'})
+}).then(password => {
   console.log(`entered: ${password}`)
 })
 .catch(err => console.error(err.stack))
