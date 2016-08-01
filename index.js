@@ -101,6 +101,7 @@ let read = {
  * // password: ******
  * @param {string} [ask] - prompt output
  * @param {Object} [options]
+ * @param {string} [options.method='mask'] - mask or hide
  * @returns {Promise<string>} input from user
  */
 function prompt (ask, options) {
