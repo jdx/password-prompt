@@ -80,7 +80,7 @@ let read = {
     return new Promise(resolve => {
       const exec = require('child_process').execSync
       stderr.write(ask)
-      let input = exec('read -s PASS && echo $PASS', {
+      let input = exec('/bin/sh -c "read -s PASS && echo \\$PASS"', {
         encoding: 'utf8',
         stdio: ['inherit', 'pipe', 'inherit']
       })
