@@ -80,12 +80,12 @@ let read = {
     return new Promise((resolve, reject) => {
       const spawn = require('cross-spawn')
       stderr.write(ask)
-      let output = spawn.sync('/bin/sh.exe',
+      let output = spawn.sync('sh',
         ['-c', 'read -s PASS && echo $PASS'], {
           stdio: ['inherit', 'pipe', 'inherit'],
           encoding: 'utf8'
         })
-      console.dir(output)
+      stderr.write('\n')
       if (output.error) return reject(output.error)
       resolve(output.stdout.trim())
     })
