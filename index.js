@@ -3,18 +3,6 @@
 const stdin = process.stdin
 const stderr = process.stderr
 
-function exec (cmd, ...args) {
-  let spawn = require('child_process').spawn
-  return new Promise((resolve, reject) => {
-    spawn(cmd, args, {stdio: 'inherit'})
-    .on('error', reject)
-    .on('close', code => {
-      if (code === 0) return resolve()
-      reject(new Error(`Process exited with code ${code}`))
-    })
-  })
-}
-
 let read = {
   hide: ask => read.raw(ask, false),
   mask: ask => read.raw(ask, true),
@@ -89,15 +77,15 @@ let read = {
     })
   },
   notty: ask => {
-    return exec('stty', '-echo')
-    .then(() => read.show(ask))
-    .then(input => {
-      console.error()
-      return exec('stty', 'echo').then(() => input)
-    })
-    .catch(err => {
-      return exec('stty', 'echo')
-      .then(() => { throw err })
+    return new Promise(resolve => {
+      const exec = require('child_process').execSync
+      stderr.write(ask)
+      let input = exec('read -s PASS && echo $PASS', {
+        encoding: 'utf8',
+        stdio: ['inherit', 'pipe', 'inherit']
+      })
+      stderr.write('\n')
+      resolve(input.trim())
     })
   },
   show: ask => {
