@@ -77,14 +77,18 @@ let read = {
     })
   },
   notty: ask => {
-    const spawn = require('cross-spawn')
-    stderr.write(ask)
-    let output = spawn.sync('/bin/sh',
-      ['-c', 'read -s PASS && echo $PASS'], {
-        stdio: ['inherit', 'pipe', 'inherit'],
-        encoding: 'utf8'
-      })
-    return Promise.resolve(output.stdout.trim())
+    return new Promise((resolve, reject) => {
+      const spawn = require('cross-spawn')
+      stderr.write(ask)
+      let output = spawn.sync('/bin/sh.exe',
+        ['-c', 'read -s PASS && echo $PASS'], {
+          stdio: ['inherit', 'pipe', 'inherit'],
+          encoding: 'utf8'
+        })
+      console.dir(output)
+      if (output.error) return reject(output.error)
+      resolve(output.stdout.trim())
+    })
   },
   show: ask => {
     return new Promise(resolve => {
