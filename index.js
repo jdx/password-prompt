@@ -89,17 +89,6 @@ let read = {
       if (output.error) return reject(output.error)
       resolve(output.stdout.trim())
     })
-  },
-  show: ask => {
-    return new Promise(resolve => {
-      stderr.write(ask)
-      stdin.resume()
-      stdin.once('data', data => {
-        // stdin.unref() // needed in cygwin
-        stdin.pause()
-        resolve(data.trim())
-      })
-    })
   }
 }
 
