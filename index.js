@@ -1,17 +1,36 @@
 'use strict'
 
+function exec (cmd) {
+  let exec = require('child_process').execSync
+  exec(cmd, {stdio: 'inherit'})
+}
+
 /**
- * prompt for a password
+ * prompt -- Prompt for a password
  * @module password-prompt
  * @example
- * let password = prompt('password >')
- * @param {string} message - message output to user
- * @param {Object} [options] - prompt options
- * @param {bool} [options.mask='*'] - mask output
- * @param {bool} [options.hide=false] - hide output
- * @returns {string} input from user
+ * let prompt = require('password-prompt')
+ * let password = prompt('password: ')
+ * @param {string} ask - prompt output
+ * @param {Object} [options]
+*  @param {Boolean} [options.mask='*'] - mask output
+*  @param {Boolean} [options.hide=false] - hide output
+ * @returns {Promise<string>} input from user
  */
-function prompt (message, options) {
+function prompt (ask, options) {
+  return new Promise((resolve, reject) => {
+    exec('stty -echo')
+    process.stdin.setEncoding('utf8')
+    process.stderr.write(ask)
+    process.stdin.resume()
+    process.stdin.once('data', data => {
+      exec('stty echo')
+      console.error()
+      process.stdin.pause()
+      data = data.trim()
+      resolve(data === '' ? prompt(ask, options) : resolve(data))
+    })
+  })
 }
 
 module.exports = prompt
