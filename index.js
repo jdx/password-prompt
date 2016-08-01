@@ -3,26 +3,25 @@
 const stdin = process.stdin
 const stderr = process.stderr
 
-function exec (cmd) {
-  let exec = require('child_process').exec
+function exec (cmd, ...args) {
+  let spawn = require('child_process').spawn
   return new Promise((resolve, reject) => {
-    exec(cmd, {stdio: 'inherit'}, (error, stdout, stderr) => {
-      if (error) reject(error)
-      resolve(stdout)
+    spawn(cmd, args, {stdio: 'inherit'})
+    .on('error', reject)
+    .on('close', code => {
+      if (code === 0) return resolve()
+      reject(new Error(`Process exited with code ${code}`))
     })
   })
 }
 
 let read = {
-  stty: ask => {
-    return exec('stty -echo')
+  notty: ask => {
+    return exec('stty', '-echo')
     .then(() => read.show(ask))
-    .then(input => exec('stty echo').then(() => input))
+    .then(input => exec('stty', 'echo').then(() => input))
     .catch(err => {
-      if (/stdin isn't a terminal/.test(err.message)) {
-        throw new Error(`Need to prompt for "${ask}" but stdin is not a terminal.`)
-      }
-      return exec('stty echo')
+      return exec('stty', 'echo')
       .then(() => { throw err })
     })
   },
@@ -42,7 +41,7 @@ let read = {
   mask: ask => read.raw(ask, true),
   raw: (ask, maskAfter) => {
     // masking isn't available without setRawMode
-    if (!stdin.setRawMode) return read.stty(ask)
+    if (!stdin.setRawMode) return read.notty(ask)
     return new Promise(function (resolve, reject) {
       const ansi = require('ansi-escapes')
 
