@@ -1,7 +1,7 @@
 {
   "name": "password-prompt",
   "description": "cross-platform masked or hidden prompt",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "Jeff Dickey @dickeyxxx",
   "bugs": "https://github.com/dickeyxxx/password-prompt/issues",
   "dependencies": {
