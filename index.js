@@ -16,27 +16,6 @@ function exec (cmd, ...args) {
 }
 
 let read = {
-  notty: ask => {
-    return exec('stty', '-echo')
-    .then(() => read.show(ask))
-    .then(input => exec('stty', 'echo').then(() => input))
-    .catch(err => {
-      return exec('stty', 'echo')
-      .then(() => { throw err })
-    })
-  },
-  show: ask => {
-    return new Promise(resolve => {
-      stderr.write(ask)
-      stdin.resume()
-      stdin.once('data', data => {
-        // stdin.unref() // needed in cygwin
-        console.error()
-        stdin.pause()
-        resolve(data.trim())
-      })
-    })
-  },
   hide: ask => read.raw(ask, false),
   mask: ask => read.raw(ask, true),
   raw: (ask, maskAfter) => {
@@ -107,6 +86,29 @@ let read = {
         }
       }
       stdin.on('data', fn)
+    })
+  },
+  notty: ask => {
+    return exec('stty', '-echo')
+    .then(() => read.show(ask))
+    .then(input => {
+      console.error()
+      return exec('stty', 'echo').then(() => input)
+    })
+    .catch(err => {
+      return exec('stty', 'echo')
+      .then(() => { throw err })
+    })
+  },
+  show: ask => {
+    return new Promise(resolve => {
+      stderr.write(ask)
+      stdin.resume()
+      stdin.once('data', data => {
+        // stdin.unref() // needed in cygwin
+        stdin.pause()
+        resolve(data.trim())
+      })
     })
   }
 }
