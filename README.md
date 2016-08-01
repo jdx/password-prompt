@@ -22,7 +22,7 @@ prompt -- Prompt for a password
 | --- | --- | --- | --- |
 | [ask] | <code>string</code> |  | prompt output |
 | [options] | <code>Object</code> |  |  |
-| [options.method] | <code>string</code> | <code>&quot;&#x27;mask&#x27;&quot;</code> | mask or hide |
+| [options.method] | <code>string</code> | <code>&quot;mask&quot;</code> | mask or hide |
 
 **Example**  
 ```js
