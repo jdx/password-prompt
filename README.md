@@ -18,10 +18,11 @@ prompt -- Prompt for a password
 
 **Returns**: <code>Promise.&lt;string&gt;</code> - input from user  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| [ask] | <code>string</code> | prompt output |
-| [options] | <code>Object</code> |  |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [ask] | <code>string</code> |  | prompt output |
+| [options] | <code>Object</code> |  |  |
+| [options.method] | <code>string</code> | <code>&quot;&#x27;mask&#x27;&quot;</code> | mask or hide |
 
 **Example**  
 ```js
