@@ -1,4 +1,15 @@
-# header
+# password-prompt
+
+Node cross-platform password prompt.
+
+Supported Environments:
+
+* Unix
+* TTY or non-TTY
+* cygwin
+* Git Bash
+* cmd.exe
+* PowerShell
 
 prompt for a password
 
@@ -15,5 +26,3 @@ prompt for a password
 ```js
 let password = prompt('password >')
 ```
-
-# footer
