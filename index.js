@@ -43,7 +43,7 @@ let read = {
       }
 
       function ctrlc () {
-        reject('')
+        reject(new Error('SIGINT'))
         stop()
       }
 
@@ -77,16 +77,14 @@ let read = {
     })
   },
   notty: ask => {
-    return new Promise(resolve => {
-      const exec = require('child_process').execSync
-      stderr.write(ask)
-      let input = exec('/bin/sh -c "read -s PASS && echo \\$PASS"', {
-        encoding: 'utf8',
-        stdio: ['inherit', 'pipe', 'inherit']
+    const spawn = require('cross-spawn')
+    stderr.write(ask)
+    let output = spawn.sync('/bin/sh',
+      ['-c', 'read -s PASS && echo $PASS'], {
+        stdio: ['inherit', 'pipe', 'inherit'],
+        encoding: 'utf8'
       })
-      stderr.write('\n')
-      resolve(input.trim())
-    })
+    return Promise.resolve(output.stdout.trim())
   },
   show: ask => {
     return new Promise(resolve => {
