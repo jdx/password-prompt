@@ -10,6 +10,8 @@ Supported Environments:
 * Git Bash
 * cmd.exe
 * PowerShell
+* cmder
+* Console2
 
 # API Reference
 prompt -- Prompt for a password
@@ -19,9 +21,11 @@ prompt -- Prompt for a password
 | Param | Type | Description |
 | --- | --- | --- |
 | [ask] | <code>string</code> | prompt output |
+| [options] | <code>Object</code> |  |
 
 **Example**  
 ```js
 let prompt = require('password-prompt')
 let password = prompt('password: ')
+// password: ******
 ```
