@@ -25,6 +25,7 @@
   "main": "index.js",
   "repository": "https://github.com/dickeyxxx/password-prompt",
   "scripts": {
-    "docs": "jsdoc2md -t README.hbs index.js > README.md; echo"
+    "docs": "jsdoc2md -t README.hbs index.js > README.md; echo",
+    "version": "npm run docs && git add README.md"
   }
 }
