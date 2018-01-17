@@ -288,16 +288,16 @@ deep-extend@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.5.0.tgz#6ef4a09b05f98b0e358d6d93d4ca3caec6672803"
 
-dmd@^3.0.7:
-  version "3.0.7"
-  resolved "https://registry.yarnpkg.com/dmd/-/dmd-3.0.7.tgz#0850b6de52db070fdd0523296eece95868971815"
+dmd@^3.0.9:
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/dmd/-/dmd-3.0.9.tgz#a8090baf7b9fd4b396c6074e662b31a17cbd1790"
   dependencies:
     array-back "^2.0.0"
     cache-point "^0.4.1"
     common-sequence "^1.0.2"
     file-set "^1.1.1"
     handlebars "^4.0.11"
-    marked "^0.3.7"
+    marked "^0.3.12"
     object-get "^2.1.0"
     reduce-flatten "^1.0.1"
     reduce-unique "^1.0.0"
@@ -572,27 +572,27 @@ jsdoc-api@^3.0.0:
     temp-path "^1.0.0"
     walk-back "^2.0.1"
 
-jsdoc-parse@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/jsdoc-parse/-/jsdoc-parse-3.0.0.tgz#271531d88f19df2520b1632a7f6c989441a87fde"
+jsdoc-parse@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/jsdoc-parse/-/jsdoc-parse-3.0.1.tgz#1194d6a16a2dfbe5fb8cccfeb5058ea808759893"
   dependencies:
-    array-back "^1.0.4"
+    array-back "^2.0.0"
     lodash.omit "^4.5.0"
     lodash.pick "^4.4.0"
     reduce-extract "^1.0.0"
-    sort-array "^1.1.1"
-    test-value "^2.1.0"
+    sort-array "^2.0.0"
+    test-value "^3.0.0"
 
-jsdoc-to-markdown@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/jsdoc-to-markdown/-/jsdoc-to-markdown-3.0.3.tgz#4ec45c87fe3dda50178806cb8a37c34c83344b26"
+jsdoc-to-markdown@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/jsdoc-to-markdown/-/jsdoc-to-markdown-3.0.4.tgz#23bcf28beb65f6e476fb27aeb4e953c41f36f6f2"
   dependencies:
     array-back "^2.0.0"
     command-line-tool "^0.7.0"
     config-master "^3.1.0"
-    dmd "^3.0.7"
+    dmd "^3.0.9"
     jsdoc-api "^3.0.0"
-    jsdoc-parse "^3.0.0"
+    jsdoc-parse "^3.0.1"
     walk-back "^3.0.0"
 
 kind-of@^3.0.2:
@@ -734,9 +734,9 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-marked@^0.3.7:
-  version "0.3.9"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.9.tgz#54ce6a57e720c3ac6098374ec625fcbcc97ff290"
+marked@^0.3.12:
+  version "0.3.12"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.12.tgz#7cf25ff2252632f3fe2406bde258e94eee927519"
 
 marked@~0.3.6:
   version "0.3.6"
@@ -866,9 +866,9 @@ pify@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-3.0.0.tgz#e5a4acd2c101fdf3d9a4d07f0dbc4db49dd28176"
 
-prettier@^1.9.2:
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.9.2.tgz#96bc2132f7a32338e6078aeb29727178c6335827"
+prettier@^1.10.2:
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.10.2.tgz#1af8356d1842276a99a5b5529c82dd9e9ad3cc93"
 
 pretty-format@^21.2.1:
   version "21.2.1"
@@ -958,9 +958,9 @@ slice-ansi@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/slice-ansi/-/slice-ansi-0.0.4.tgz#edbf8903f66f7ce2f8eafd6ceed65e264c831b35"
 
-sort-array@^1.1.1:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/sort-array/-/sort-array-1.1.2.tgz#b88986053c0170a7f9de63f18a49ec79c24c3e64"
+sort-array@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/sort-array/-/sort-array-2.0.0.tgz#38a9c6da27fd7d147b42e60554f281187b4df472"
   dependencies:
     array-back "^1.0.4"
     object-get "^2.1.0"
