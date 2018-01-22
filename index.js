@@ -102,7 +102,7 @@ function prompt(ask, options) {
     {
       method: 'mask',
     },
-    options,
+    options
   )
   stdin.setEncoding('utf8')
   return read[options.method](ask).then(input => input || prompt(ask))
