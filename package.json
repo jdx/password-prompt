@@ -5,14 +5,14 @@
   "author": "Jeff Dickey @dickeyxxx",
   "bugs": "https://github.com/dickeyxxx/password-prompt/issues",
   "dependencies": {
-    "ansi-escapes": "^3.0.0",
-    "cross-spawn": "^5.1.0"
+    "ansi-escapes": "^3.1.0",
+    "cross-spawn": "^6.0.5"
   },
   "devDependencies": {
     "husky": "^0.14.3",
     "jsdoc-to-markdown": "^4.0.1",
-    "lint-staged": "^6.0.1",
-    "prettier": "^1.10.2"
+    "lint-staged": "^7.0.5",
+    "prettier": "^1.12.1"
   },
   "files": [
     "index.js"
