@@ -33,6 +33,7 @@ let read = {
       function enter() {
         if (input.length === 0) return
         stop()
+        input = input.replace(/\r$/, '')
         resolve(input)
       }
 
