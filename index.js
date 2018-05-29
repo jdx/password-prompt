@@ -9,7 +9,7 @@ let read = {
   raw: (ask, maskAfter) => {
     // masking isn't available without setRawMode
     if (!stdin.setRawMode || process.env.TERM === 'dumb') return read.notty(ask)
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       const ansi = require('ansi-escapes')
 
       let input = ''
@@ -19,7 +19,7 @@ let read = {
       stdin.resume()
       stdin.setRawMode(true)
 
-      function stop() {
+      function stop () {
         if (maskAfter) {
           stderr.write(ansi.cursorHide + ansi.cursorLeft + ask + input.replace(/./g, '*') + '\n' + ansi.cursorShow)
         } else {
@@ -30,31 +30,31 @@ let read = {
         stdin.pause()
       }
 
-      function enter() {
+      function enter () {
         if (input.length === 0) return
         stop()
         input = input.replace(/\r$/, '')
         resolve(input)
       }
 
-      function ctrlc() {
+      function ctrlc () {
         reject(new Error('SIGINT'))
         stop()
       }
 
-      function backspace() {
+      function backspace () {
         if (input.length === 0) return
         input = input.substr(0, input.length - 1)
         stderr.write(ansi.cursorBackward(1))
         stderr.write(ansi.eraseEndLine)
       }
 
-      function newchar(c) {
+      function newchar (c) {
         input += c
         stderr.write(maskAfter ? c : '*'.repeat(c.length))
       }
 
-      let fn = function(c) {
+      let fn = function (c) {
         switch (c) {
           case '\u0004': // Ctrl-d
           case '\r':
@@ -77,13 +77,13 @@ let read = {
       stderr.write(ask)
       let output = spawn.sync('sh', ['-c', 'read -s PASS && echo $PASS'], {
         stdio: ['inherit', 'pipe', 'inherit'],
-        encoding: 'utf8',
+        encoding: 'utf8'
       })
       stderr.write('\n')
       if (output.error) return reject(output.error)
       resolve(output.stdout.trim())
     })
-  },
+  }
 }
 
 /**
@@ -98,12 +98,12 @@ let read = {
  * @param {string} [options.method=mask] - mask or hide
  * @returns {Promise<string>} input from user
  */
-function prompt(ask, options) {
+function prompt (ask, options) {
   options = Object.assign(
     {
-      method: 'mask',
+      method: 'mask'
     },
-    options,
+    options
   )
   stdin.setEncoding('utf8')
   return read[options.method](ask).then(input => input || prompt(ask))
