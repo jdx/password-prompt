@@ -3,16 +3,21 @@
 const stdin = process.stdin
 const stderr = process.stderr
 
-let read = {
-  hide: ask => read.raw(ask, false),
-  mask: ask => read.raw(ask, true),
-  raw: (ask, maskAfter) => {
+const MODE_HIDE = 'hide'
+const MODE_MASK = 'mask'
+const MODE_CHOKE = 'choke'
+
+const read = {
+  [MODE_HIDE]: ask => read.raw(ask, MODE_HIDE),
+  [MODE_MASK]: ask => read.raw(ask, MODE_MASK),
+  [MODE_CHOKE]: ask => read.raw(ask, MODE_CHOKE),
+  raw: (ask, mode) => {
     // masking isn't available without setRawMode
     if (!stdin.setRawMode || process.env.TERM === 'dumb') return read.notty(ask)
     return new Promise(function (resolve, reject) {
       const ansi = require('ansi-escapes')
-
       let input = ''
+
       stderr.write(ansi.eraseLine)
       stderr.write(ansi.cursorLeft)
       stderr.write(ask)
@@ -20,7 +25,7 @@ let read = {
       stdin.setRawMode(true)
 
       function stop () {
-        if (maskAfter) {
+        if (mode === MODE_MASK) {
           stderr.write(ansi.cursorHide + ansi.cursorLeft + ask + input.replace(/./g, '*') + '\n' + ansi.cursorShow)
         } else {
           stderr.write('\n')
@@ -49,9 +54,15 @@ let read = {
         stderr.write(ansi.eraseEndLine)
       }
 
+      const out = {
+        [MODE_HIDE]: c => '*'.repeat(c.length),
+        [MODE_MASK]: c => c,
+        [MODE_CHOKE]: null,
+      };
+
       function newchar (c) {
         input += c
-        stderr.write(maskAfter ? c : '*'.repeat(c.length))
+        out[mode] && stderr.write(out[mode](c));
       }
 
       let fn = function (c) {
@@ -110,3 +121,4 @@ function prompt (ask, options) {
 }
 
 module.exports = prompt
+
