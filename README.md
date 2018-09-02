@@ -22,11 +22,14 @@ prompt -- Prompt for a password
 | --- | --- | --- | --- |
 | [ask] | <code>string</code> |  | prompt output |
 | [options] | <code>Object</code> |  |  |
-| [options.method] | <code>string</code> | <code>&quot;mask&quot;</code> | mask or hide |
+| [options.method] | <code>string</code> | <code>&quot;mask&quot;</code> | mask / hide / choke |
 
 **Example**  
 ```js
 let prompt = require('password-prompt')
 let password = prompt('password: ')
+let password = prompt('password: ', { method: 'mask' })
+let password = prompt('password: ', { method: 'hide' })
+let password = prompt('password: ', { method: 'choke' })
 // password: ******
 ```
