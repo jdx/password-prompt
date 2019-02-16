@@ -4,15 +4,15 @@ const stdin = process.stdin
 const stderr = process.stderr
 
 let read = {
-  hide: (ask, options) => read.raw(ask, false, options),
-  mask: (ask, options) => read.raw(ask, true, options),
-  raw: (ask, maskAfter, options) => {
+  hide: (ask, options = {}) => read.raw(ask, false, options),
+  mask: (ask, options = {}) => read.raw(ask, true, options),
+  raw: (ask, maskAfter, options = {}) => {
     // masking isn't available without setRawMode
     if (!stdin.setRawMode || process.env.TERM === 'dumb') return read.notty(ask)
     return new Promise(function (resolve, reject) {
       const ansi = require('ansi-escapes')
 
-      let input = options.default || ''
+      let input = ''
       stderr.write(ansi.eraseLine)
       stderr.write(ansi.cursorLeft)
       stderr.write(ask)
@@ -31,6 +31,7 @@ let read = {
       }
 
       function enter () {
+        input = input || options.default
         if (options.required && input.length === 0) return
         stop()
         input = input.replace(/\r$/, '')
@@ -98,11 +99,12 @@ let read = {
  * @param {string} [options.method=mask] - mask or hide
  * @returns {Promise<string>} input from user
  */
-function prompt (ask, options) {
+function prompt (ask, options = {}) {
   options = Object.assign(
     {
       method: 'mask',
-      required: true
+      required: true,
+      default: ''
     },
     options
   )
