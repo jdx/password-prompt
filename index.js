@@ -4,9 +4,9 @@ const stdin = process.stdin
 const stderr = process.stderr
 
 let read = {
-  hide: ask => read.raw(ask, false),
-  mask: ask => read.raw(ask, true),
-  raw: (ask, maskAfter) => {
+  hide: (ask, options = {}) => read.raw(ask, false, options),
+  mask: (ask, options = {}) => read.raw(ask, true, options),
+  raw: (ask, maskAfter, options = {}) => {
     // masking isn't available without setRawMode
     if (!stdin.setRawMode || process.env.TERM === 'dumb') return read.notty(ask)
     return new Promise(function (resolve, reject) {
@@ -31,7 +31,8 @@ let read = {
       }
 
       function enter () {
-        if (input.length === 0) return
+        input = input || options.default
+        if (options.required && input.length === 0) return
         stop()
         input = input.replace(/\r$/, '')
         resolve(input)
@@ -98,15 +99,17 @@ let read = {
  * @param {string} [options.method=mask] - mask or hide
  * @returns {Promise<string>} input from user
  */
-function prompt (ask, options) {
+function prompt (ask, options = {}) {
   options = Object.assign(
     {
-      method: 'mask'
+      method: 'mask',
+      required: true,
+      default: ''
     },
     options
   )
   stdin.setEncoding('utf8')
-  return read[options.method](ask).then(input => input || prompt(ask))
+  return read[options.method](ask, options).then(input => input || (options.required ? prompt(ask) : ''))
 }
 
 module.exports = prompt
