@@ -1,7 +1,7 @@
 {
   "name": "password-prompt",
   "description": "cross-platform masked or hidden prompt",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Jeff Dickey @jdxcode",
   "bugs": "https://github.com/jdxcode/password-prompt/issues",
   "dependencies": {
