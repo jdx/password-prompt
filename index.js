@@ -31,10 +31,10 @@ let read = {
       }
 
       function enter () {
-        input = input || options.default
         if (options.required && input.length === 0) return
         stop()
         input = input.replace(/\r$/, '')
+        input = input || options.default
         resolve(input)
       }
 
@@ -103,7 +103,7 @@ function prompt (ask, options = {}) {
   options = Object.assign(
     {
       method: 'mask',
-      required: true,
+      required: options.default === undefined,
       default: ''
     },
     options
