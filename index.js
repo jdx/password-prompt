@@ -92,7 +92,7 @@ let read = {
  * @module password-prompt
  * @example
  * let prompt = require('password-prompt')
- * let password = prompt('password: ')
+ * let password = await prompt('password: ')
  * // password: ******
  * @param {string} [ask] - prompt output
  * @param {Object} [options]
