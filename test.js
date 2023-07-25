@@ -1,6 +1,6 @@
 'use strict'
 
-let prompt = require('./index')
+const prompt = require('./index')
 prompt('hide: ', { method: 'hide' })
   .then(password => {
     console.log(`entered: ${password}`)

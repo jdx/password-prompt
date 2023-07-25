@@ -5,12 +5,12 @@
   "author": "Jeff Dickey @jdxcode",
   "bugs": "https://github.com/jdxcode/password-prompt/issues",
   "dependencies": {
-    "ansi-escapes": "^3.1.0",
-    "cross-spawn": "^6.0.5"
+    "ansi-escapes": "^4.3.2",
+    "cross-spawn": "^7.0.3"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^4.0.1",
-    "standard": "^11.0.1"
+    "jsdoc-to-markdown": "^8.0.0",
+    "standard": "^17.1.0"
   },
   "files": [
     "index.js"
