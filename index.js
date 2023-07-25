@@ -3,7 +3,7 @@
 const stdin = process.stdin
 const stderr = process.stderr
 
-let read = {
+const read = {
   hide: (ask, options = {}) => read.raw(ask, false, options),
   mask: (ask, options = {}) => read.raw(ask, true, options),
   raw: (ask, maskAfter, options = {}) => {
@@ -55,7 +55,7 @@ let read = {
         stderr.write(maskAfter ? c : '*'.repeat(c.length))
       }
 
-      let fn = function (c) {
+      const fn = function (c) {
         switch (c) {
           case '\u0004': // Ctrl-d
           case '\r':
@@ -76,7 +76,7 @@ let read = {
     return new Promise((resolve, reject) => {
       const spawn = require('cross-spawn')
       stderr.write(ask)
-      let output = spawn.sync('sh', ['-c', 'read -s PASS && echo $PASS'], {
+      const output = spawn.sync('sh', ['-c', 'read -s PASS && echo $PASS'], {
         stdio: ['inherit', 'pipe', 'inherit'],
         encoding: 'utf8'
       })
