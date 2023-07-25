@@ -22,7 +22,7 @@
     "password",
     "prompt"
   ],
-  "license": "WTFPL",
+  "license": "0BSD",
   "main": "index.js",
   "repository": "https://github.com/jdxcode/password-prompt",
   "scripts": {
